@@ -215,9 +215,10 @@ int main(int argc, char **argv) {
         //        cv2.applyColorMap(cv2.convertScaleAbs(norm_disparity_map,1), cv2.COLORMAP_MAGMA)
         cv::convertScaleAbs(showImg,colorimg);
         cv::applyColorMap(colorimg,colorimgfinal,cv::COLORMAP_PARULA);
+//        cv::applyColorMap(colorimg,colorimgfinal,cv::COLORMAP_HOT);
         //    namedWindow("image", cv::WINDOW_AUTOSIZE);
         //    imshow("image", colorimgfinal);
-        cv::imwrite("a.png",colorimgfinal);
+        cv::imwrite("../result_"+std::to_string(imgid)+".png",colorimgfinal);
     }
 
     return 0;
