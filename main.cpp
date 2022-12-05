@@ -61,6 +61,9 @@ int main(int argc, char **argv) {
         return -1;
     }
 
+    int img_w = 416;
+    int img_h = 416;
+
     cv::Mat dst;
 //    auto model = new ModelNpuRK();
 //    model->InitContext("/root/ljdong/ljx/depth_for_rknn/monodepth.rknn");
@@ -92,13 +95,14 @@ int main(int argc, char **argv) {
     {
         auto imageName = imageNameList.at(imgid);
         cv::Mat image_in = cv::imread(imageName);
-        cv::resize(image_in, dst, cv::Size(640
-                , 192));
+
+        cv::resize(image_in, dst, cv::Size(img_w
+                , img_h));
 
         using TYPE = uint8_t;
         cv::cvtColor(dst, dst, cv::COLOR_BGR2RGB);
         TYPE *ptr = (TYPE *) malloc(dst.rows * dst.cols * dst.channels() * sizeof(TYPE));
-        memcpy(ptr, dst.data, dst.rows * dst.cols * dst.channels() * sizeof(TYPE));
+        memcpy(ptr, dst.data , dst.rows * dst.cols * dst.channels() * sizeof(TYPE));
 
         //    bool flag = false;
         //    flag = model->UploadTensor(ptr);
